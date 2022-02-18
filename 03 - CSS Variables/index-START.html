@@ -18,10 +18,22 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img src="../tumblr_pa0p4nIe8U1qa9gmgo4_r1_1280.jpg">
 
   <style>
-
+    :root{
+      --base: #56a9c9;
+      --blur: 10px;
+      --spacing: 30px;
+    }
+    img{
+      padding: var(--spacing);
+      background-color: var(--base);
+      filter: blur(var(--blur));
+    }
+    .hl{
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -45,6 +57,18 @@
   </style>
 
   <script>
+    const Inputs = document.querySelectorAll('.controls input')
+    console.log(Inputs);
+
+    function handleUpdate(){
+      console.log(this.value);
+      const suffix = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+    }
+    Inputs.forEach(input =>{
+      input.addEventListener('change',handleUpdate);
+      input.addEventListener('mousemove',handleUpdate);
+    })
   </script>
 
 </body>
